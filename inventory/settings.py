@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -16,6 +17,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'crispy_bootstrap5',
+    'django_extensions',
+    'phonenumber_field',
+    'imagekit',
     'accounts',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
@@ -86,5 +90,8 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+MEDIA_URL = '/images/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
