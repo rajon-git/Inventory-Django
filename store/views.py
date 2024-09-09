@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     CreateView,
+    UpdateView
 )
 from .models import *
 from django_tables2.export.views import ExportMixin
@@ -24,6 +25,14 @@ class ProductCreateView( CreateView):
     template_name = 'store/productcreate.html'
     fields = ['name','category','quantity','selling_price', 'expiring_date', ]
     success_url = '/products'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+    
+class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Item
+    template_name = 'store/productupdate.html'
+    fields = ['name','category','quantity','selling_price', 'expiring_date', 'vendor']
 
     def form_valid(self, form):
         return super().form_valid(form)
