@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'imagekit',
     'accounts',
+    'store',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
