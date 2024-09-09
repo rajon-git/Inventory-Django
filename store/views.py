@@ -4,8 +4,21 @@ from django.views.generic import (
     CreateView,
 )
 from .models import *
+from django_tables2.export.views import ExportMixin
+import django_tables2 as tables
+from .tables import ItemTable
+from django_tables2 import SingleTableView
 
 # Create your views here.
+
+class ProductListView(ExportMixin, tables.SingleTableView):
+    model = Item 
+    table_class = ItemTable
+    template_name = 'store/productslist.html'
+    context_object_name = 'items'
+    paginate_by = 10
+    SingleTableView.table_pagination = False
+
 class ProductCreateView( CreateView):
     model = Item
     template_name = 'store/productcreate.html'
